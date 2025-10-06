@@ -11,6 +11,9 @@ django-rest-framework = "*"
 django-cors-headers = "*"
 
 [dev-packages]
+pytest = "*"
+pytest-django = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.12"
