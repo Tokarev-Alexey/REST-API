@@ -1,7 +1,7 @@
 import pytest
 from django.utils import timezone
-
 from users.models import ProfileUser
+from conftest import basic_user
 
 """1. Базовое создание пользователя
 Создание пользователя с минимальными данными (username, password)
@@ -23,14 +23,6 @@ __str__ метод - возвращает username
 # Маркируем все тесты в файле
 pytestmark = pytest.mark.users
 
-@pytest.fixture
-def basic_user():
-    """Фикстура создает одного пользователя с фиксированными данными"""
-    return ProfileUser.objects.create_user(
-        username='testuser',
-        password='testpassword',
-        email='test@mail.ru'
-    )
 
 # Создание пользователя с минимальными данными (username, password)
 @pytest.mark.django_db
