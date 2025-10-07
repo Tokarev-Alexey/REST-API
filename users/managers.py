@@ -14,15 +14,21 @@ class ProfileUserManager(UserManager):
 
     def create_user(self, username, email=None, password=None, **extra_fields):
         if not password:
-            raise ValueError("Password is required")
+            raise ValueError("Требуется ввести пароль.")
 
         if not username:
-            raise ValueError('The given username must be set')
+            raise ValueError('Необходимо указать имя пользователя.')
+
+        if self.model.objects.filter(username=username).exists():
+            raise ValueError("Пользователь с таким именем уже есть.")
 
         if email == '' or email is None:
             email = None
         else:
             email = self.normalize_email(email)
+
+        if self.model.objects.filter(email=email).exists():
+            raise ValueError("Этот email уже зарегистрирован.")
 
         user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
@@ -31,16 +37,16 @@ class ProfileUserManager(UserManager):
 
     def create_superuser(self, username, email=None, password=None, **extra_fields):
         if not password:
-            raise ValueError("Password is required")
+            raise ValueError("Требуется ввести пароль.")
 
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
 
         if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
+            raise ValueError('Суперпользователь должен иметь статус is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
+            raise ValueError('Суперпользователь должен иметь статус is_superuser=True.')
 
         # 4. Вызов create_user с установленными флагами
         return self.create_user(username, email, password, **extra_fields)
