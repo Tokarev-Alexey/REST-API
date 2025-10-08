@@ -9,6 +9,7 @@ mysqlclient = "*"
 pillow = "*"
 django-rest-framework = "*"
 django-cors-headers = "*"
+drf-yasg = "*"
 
 [dev-packages]
 pytest = "*"
