@@ -6,7 +6,7 @@ class ProfileUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProfileUser
-        fields = ['id', 'username', 'password', 'email']
+        fields = ['id', 'username', 'password', 'email', 'avatar']
 
     def create(self, validated_data):
         password = validated_data.pop('password')  #Достаем пароль

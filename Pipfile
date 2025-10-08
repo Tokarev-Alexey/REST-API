@@ -9,8 +9,12 @@ mysqlclient = "*"
 pillow = "*"
 django-rest-framework = "*"
 django-cors-headers = "*"
+drf-yasg = "*"
 
 [dev-packages]
+pytest = "*"
+pytest-django = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.12"

@@ -41,7 +41,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all().order_by('-pub_date')
     serializer_class = CommentSerializer
     authentication_classes = [SessionAuthentication, TokenAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerCommentOrReadOnly]
+    permission_classes = [IsOwnerCommentOrReadOnly]
     pagination_class = LimitOffsetPagination
     '''Автоматом ставит юзера на место автора но к этому нужно еще чтобы поле author_comm=read_only в сериализаторе,
     иначе оно будет подставлено, но его все еще можно будет заменить'''

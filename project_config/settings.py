@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -164,3 +165,26 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_ALL_ORIGINS = True # дает всем доменам доступ
 #CORS_ALLOW_CREDENTIALS = True #Если установлено значение True , файлы cookie будут включены в межсайтовые HTTP-запросы
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Basic': {
+            'type': 'basic'
+        },
+        'Token': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'Token-based authentication with format: Token <your_token>'
+        },
+        'Session': {
+            'type': 'apiKey',
+            'name': 'sessionid',
+            'in': 'cookie',
+            'description': 'Django session authentication'
+        }
+    },
+    'USE_SESSION_AUTH': True,  # включить кнопку Django Login
+    'LOGIN_URL': 'rest_framework:login',
+    'LOGOUT_URL': 'rest_framework:logout',
+}
