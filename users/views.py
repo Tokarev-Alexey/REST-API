@@ -37,9 +37,9 @@ class Podpiski(viewsets.ViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerCommentOrReadOnly]
 
     def list(self, request):
-        return Response({'подписчики':'/sub/subscribers/',
-                         'подписки':'/sub/subscriptions/',
-                         'подписаться/отписаться':'subscription_on_or_off'})
+        return Response({'подписчики':'/subscribers/',
+                         'подписки':'/subscriptions/',
+                         'подписаться/отписаться':'/pk/subscription_on_or_off'})
 
     @action(detail=False, methods=['get'])
     def subscribers(self, request):

@@ -1,5 +1,6 @@
 import pytest
 from users.models import ProfileUser
+from posts.models import Post, Comment
 from rest_framework.test import APIClient
 
 
@@ -20,3 +21,27 @@ def api_client():
 def authenticated_client(api_client, basic_user):
     api_client.force_authenticate(user=basic_user)
     return api_client
+
+@pytest.fixture()
+def post(basic_user):
+    return Post.objects.create(title='Заголовок',
+                               text='Какой-то текст поста.',
+                               author=basic_user)
+
+@pytest.fixture()
+def comment(basic_user, post):
+    return Comment.objects.create(post=post,
+                                  author_comm=basic_user,
+                                  text_comm='Комментарий')
+
+@pytest.fixture()
+def fabric_posts():
+    def create(**kwargs):
+        return Post.objects.create(**kwargs)
+    return create
+
+@pytest.fixture()
+def fabric_users():
+    def create(**kwargs):
+        return ProfileUser.objects.create(**kwargs)
+    return create
