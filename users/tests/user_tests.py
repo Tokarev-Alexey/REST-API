@@ -21,7 +21,7 @@ __str__ метод - возвращает username
 """
 
 # Маркируем все тесты в файле
-pytestmark = pytest.mark.users
+
 
 
 # Создание пользователя с минимальными данными (username, password)

@@ -23,14 +23,14 @@ def authenticated_client(api_client, basic_user):
     return api_client
 
 @pytest.fixture()
-def post(basic_user):
+def basic_post(basic_user):
     return Post.objects.create(title='Заголовок',
                                text='Какой-то текст поста.',
                                author=basic_user)
 
 @pytest.fixture()
-def comment(basic_user, post):
-    return Comment.objects.create(post=post,
+def basic_comment(basic_user, basic_post):
+    return Comment.objects.create(post=basic_post,
                                   author_comm=basic_user,
                                   text_comm='Комментарий')
 

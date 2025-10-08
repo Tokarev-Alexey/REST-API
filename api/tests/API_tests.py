@@ -5,37 +5,37 @@ from posts.models import *
 pytestmark = pytest.mark.api
 
 @pytest.mark.django_db
-def test_get_comment(api_client, comment):
+def test_get_comment(api_client, basic_comment):
     response = api_client.get('/comment/')
     assert response.status_code == 200
     assert Comment.objects.count() == 1
 
 @pytest.mark.django_db
-def test_create_comment(authenticated_client, post):
+def test_create_comment(authenticated_client, basic_post):
     response = authenticated_client.post('/comment/', {
-        'post': post.id,
+        'post': basic_post.id,
         'text_comm': 'Комментарий'
     })
     assert response.status_code == 201
     assert Comment.objects.count() == 1
 
 @pytest.mark.django_db
-def test_create_comment_no_auth(api_client, post):
+def test_create_comment_no_auth(api_client, basic_post):
     response = api_client.post('/comment/', {
-        'post': post.id,
+        'post': basic_post.id,
         'text_comm': 'Комментарий'
     })
     assert response.status_code == 401 or response.status_code == 403
 
 @pytest.mark.django_db
-def test_del_comment(authenticated_client,comment):
-    response = authenticated_client.delete('/comment/1/')
+def test_del_comment(authenticated_client, basic_comment):
+    response = authenticated_client.delete(f'/comment/{basic_comment.id}/')
     assert response.status_code == 204
     assert Comment.objects.count() == 0
 
 @pytest.mark.django_db
-def test_del_comment_no_auth(api_client,comment):
-    response = api_client.delete('/comment/1/')
+def test_del_comment_no_auth(api_client, basic_comment):
+    response = api_client.delete(f'/comment/{basic_comment.id}/')
     assert response.status_code == 401 or response.status_code == 403
 
 @pytest.mark.django_db
@@ -44,9 +44,9 @@ def test_feed_content(authenticated_client, fabric_posts,fabric_users, basic_use
     Anna = fabric_users(username='Anna', password='pass', email='b@mail.ru')
     Ben = fabric_users(username='Ben', password='pass', email='d@mail.ru')
 
-    post_jon = fabric_posts(title='пост Джона', text='текст', author=Jon)
-    post_anna = fabric_posts(title='пост Анны', text='текст', author=Anna)
-    post_ben = fabric_posts(title='пост Бена', text='текст', author=Ben)
+    fabric_posts(title='пост Джона', text='текст', author=Jon)
+    fabric_posts(title='пост Анны', text='текст', author=Anna)
+    fabric_posts(title='пост Бена', text='текст', author=Ben)
 
     basic_user.subscriptions.add(Jon)
     basic_user.subscriptions.add(Anna)
