@@ -23,14 +23,16 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 SECRET_KEY = 'django-insecure-!my!s#rhf_%#al=(0tzq7z-q**q-6c03t9gs7=6cmqfyaav5*h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
 # место хранения media
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 AUTH_USER_MODEL = 'users.ProfileUser'
 
@@ -137,8 +139,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
