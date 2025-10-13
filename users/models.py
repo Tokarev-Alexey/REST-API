@@ -30,7 +30,7 @@ class ProfileUser(AbstractUser):
     )
     email = models.EmailField(blank=True, null=True, unique=True)
     subscriptions = models.ManyToManyField('self', symmetrical=False, related_name='subscribers', blank=True)
-    avatar = models.ImageField(upload_to=MEDIA_URL, blank=True, null=True)
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
 
     def __str__(self):
         return f'{self.username}'
