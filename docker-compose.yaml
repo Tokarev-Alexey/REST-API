@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0.43-debian
+    container_name: a_new_begining_mysql_con
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: firstdb
+      MYSQL_USER: firstuser
+      MYSQL_PASSWORD: firstpassword
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  web:
+    build: .
+    container_name: a_new_begining_django_con
+    environment:
+      DB_HOST: db
+      DB_NAME: firstdb
+      DB_USER: firstuser
+      DB_PASSWORD: firstpassword
+      DEBUG: "False"
+    ports:
+      - "8000:8000"
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    depends_on:
+      - db
+    command: >
+      sh -c "
+        echo 'Waiting for database...' &&
+        sleep 20 &&
+        echo 'Running migrations...' &&
+        python manage.py migrate --noinput &&
+        echo 'Loading fixtures...' &&
+        python manage.py loaddata users_fixture.json posts_fixture.json comments_fixture.json &&
+        echo 'Starting Django...' &&
+        exec uwsgi --http-socket :8000 --module project_config.wsgi
+      "
+
+  nginx:
+    build: ./nginx
+    container_name: a_new_begining_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - static_volume:/static
+      - media_volume:/media
+    depends_on:
+      - web
+
+volumes:
+  mysql_data:
+  static_volume:
+  media_volume:
