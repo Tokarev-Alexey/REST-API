@@ -15,12 +15,6 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-#    healthcheck:
-#      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -prootpassword"]
-#      timeout: 10s
-#      interval: 5s
-#      retries: 10
-#      start_period: 30s
 
   web:
     build: .
@@ -41,7 +35,7 @@ services:
     command: >
       sh -c "
         echo 'Waiting for database...' &&
-        sleep 15 &&
+        sleep 20 &&
         echo 'Running migrations...' &&
         python manage.py migrate --noinput &&
         echo 'Loading fixtures...' &&
