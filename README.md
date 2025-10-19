@@ -200,7 +200,7 @@ python3 manage.py createsuperuser
 
 # Документация API
 
-    После запуска доступна интерактивная документация:
+После запуска доступна интерактивная документация:
 - Swagger UI: http://localhost/swagger/
 - ReDoc: http://localhost/redoc/
 
