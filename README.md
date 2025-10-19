@@ -9,6 +9,8 @@ Django REST API блог-платформа с системой подписок
 - Контейнеризация: Docker, Docker Compose
 - Web server: Nginx + uWSGI
 - Аутентификация: TokenAuthentification
+- Тестирование: pytest + coverage
+- Документация: Swagger, ReDoc.
 
 # Быстрый старт
 
@@ -16,28 +18,28 @@ Django REST API блог-платформа с системой подписок
 В терминале нужно выполнить следующее (инструкция для linux/Ubuntu):
 
 Создаем папку:
-mkdir app
+ ```mkdir app```
 
 Заходим в нее:
-cd app/
+```cd app/```
 
 Создаем пустой git репозиторий:
-git init
+```git init```
 
 Клонируем проект из репозитория:
-git clone git@github.com:Tokarev-Alexey/REST-API.git
+```git clone git@github.com:Tokarev-Alexey/REST-API.git```
 
 Заходим в нее:
-cd REST-API
+```cd REST-API```
 
 Запускоем все сервисы
-docker-compose up --build
+```docker-compose up --build```
 
 Приложение будет доступно по http://localhost:80
 
-```Тестировать можно в браузере с SessionAuthentification, а можно и через Postman```
+Тестировать можно в браузере с SessionAuthentification, а можно и через Postman
 Формат вывода ответа
-
+```
 {
     "count": 100,
     "next": "http://localhost/posts/?limit=10&offset=10",
@@ -64,7 +66,7 @@ docker-compose up --build
                     "pub_date": "2025-09-26T11:01:48.879000Z",
                     "post": 100
                 },...
-
+```
 # API Endpoints
 
  Аутентификация
@@ -87,16 +89,16 @@ Response (Должен вернуть токен для авторизации):
 # Посты
 
 Лента постов:
-http GET /posts/
-Authorization: Token <your_token>
+    http GET /posts/
+    Authorization: Token <your_token>
 
 Лента ВСЕХ комментарие:
-http GET /comments/
-Authorization: Token <your_token>
+    http GET /comments/
+    Authorization: Token <your_token>
 
 Лента со ВСЕМИ пользователями:
-http GET /users/
-Authorization: Token <your_token>
+    http GET /users/
+    Authorization: Token <your_token>
 
 Система подписок /supscriptions/ содержащая внутри ссылки на:
     Ленту с подписчиками:
