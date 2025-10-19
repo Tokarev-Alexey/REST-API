@@ -169,7 +169,7 @@ REST-API/
 ```
 
 # Разработка
-##Запуск тестов.
+Запуск тестов.
 
 ```bash
 # Все тесты
@@ -183,14 +183,14 @@ coverage report
 pytest posts/tests/ -v
 ```
 
-    Создание миграций
+Создание миграций.
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-    Создание суперпользователя (уже создан -u:-p admin:admin)
+Создание суперпользователя (уже создан -u:-p admin:admin).
 
 ```bash
 python manage.py createsuperuser
