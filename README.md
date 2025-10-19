@@ -115,14 +115,12 @@ Response (Должен вернуть токен для авторизации):
 ```
 Так же можно...
 Всем зарегистрированным пользователям можно выполнять GET POST PUT DELETE запросы, неавторизованным доступен только просмотр.
-
-Посмотерть определенный пост или удалить DELETE или изменить PUT:
 ```
+#Посмотерть определенный пост или удалить DELETE или изменить PUT:
 http GET /posts/1 где 1 - id поста
 Authorization: Token <your_token>
-```
-Создать пост:
-```
+
+# Создать пост:
 http POST /posts/
 Authorization: Token <your_token>
 Content-Type: application/json
@@ -131,15 +129,12 @@ Content-Type: application/json
   "title": "Мой первый пост",
   "text": "Содержание поста..."
 }
-```
-Посмотреть определенный комментарий или удалить DELETE или изменить PUT:
-```
+
+# Посмотреть определенный комментарий или удалить DELETE или изменить PUT:
 http GET /comments/1
 Authorization: Token <your_token>
-```
 
-Создать комментарий:
-```
+# Создать комментарий:
 http POST /comments/
 Authorization: Token <your_token>
 Content-Type: application/json
@@ -148,9 +143,9 @@ Content-Type: application/json
   "post": 1,
   "text": "Отличный пост!"
 }
-```
- Лента пользователя
-```
+
+# Лента пользователя
+
 http GET /feed/
 Authorization: Token <your_token>
 ```
