@@ -16,29 +16,30 @@ Django REST API блог-платформа с системой подписок
 
 Запуск с Docker Compose (рекомендуется)
 В терминале нужно выполнить следующее (инструкция для linux/Ubuntu):
+```
+# Создаем папку:
+ mkdir app
 
-Создаем папку:
- ```mkdir app```
+# Заходим в нее:
+cd app/
 
-Заходим в нее:
-```cd app/```
+# Создаем пустой git репозиторий:
+git init
 
-Создаем пустой git репозиторий:
-```git init```
+# Клонируем проект из репозитория:
+git clone git@github.com:Tokarev-Alexey/REST-API.git
 
-Клонируем проект из репозитория:
-```git clone git@github.com:Tokarev-Alexey/REST-API.git```
+# Заходим в нее:
+cd REST-API
 
-Заходим в нее:
-```cd REST-API```
-
-Запускоем все сервисы
-```docker-compose up --build```
-
+# Запускоем все сервисы
+docker-compose up --build
+```
 Приложение будет доступно по http://localhost:80
 
-Тестировать можно в браузере с SessionAuthentification, а можно и через Postman
-Формат вывода ответа
+Тестировать можно в браузере с SessionAuthentification, а можно и через Postman.
+
+Формат вывода ответа:
 ```
 {
     "count": 100,
