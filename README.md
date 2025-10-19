@@ -216,7 +216,7 @@ DB_PASSWORD=firstpassword
 
 # Примеры использования
 
-    Создание поста через curl
+Создание поста через curl:
 
 ```bash
 curl -X POST http://localhost/posts/ \
@@ -225,7 +225,7 @@ curl -X POST http://localhost/posts/ \
   -d '{"title": "Тестовый пост", "text": "Содержание"}'
 ```
 
-    Получение ленты
+Получение ленты:
 
 ```bash
 curl -X GET http://localhost/feed/ \
