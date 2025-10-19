@@ -70,7 +70,7 @@ Django REST API блог-платформа с системой подписок
 # API Endpoints
 
  Аутентификация
-
+```
 http POST /api-token-auth/ 
 Content-Type: application/json
 
@@ -78,20 +78,20 @@ Content-Type: application/json
   "username": "user123",
   "password": "password123"
 }
-
+```
 Response (Должен вернуть токен для авторизации):
+```
 {
   "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
 }
+```
+# На главной странице вас встретят следующие адреса:
 
-```На главной странице вас встретят следующие адреса:```
-
-# Посты
-
+```
 Лента постов:
     http GET /posts/
     Authorization: Token <your_token>
-
+    
 Лента ВСЕХ комментарие:
     http GET /comments/
     Authorization: Token <your_token>
@@ -111,15 +111,17 @@ Response (Должен вернуть токен для авторизации):
     
     Кнопка подписаться/отписаться:
     http POST /pk/subscription_on_or_off где pk - id пользователя на которого хотим подписаться/отписаться
-
+```
 Так же можно...
 Всем зарегистрированным пользователям можно выполнять GET POST PUT DELETE запросы, неавторизованным доступен только просмотр.
 
 Посмотерть определенный пост или удалить DELETE или изменить PUT:
+```
 http GET /posts/1 где 1 - id поста
 Authorization: Token <your_token>
-
+```
 Создать пост:
+```
 http POST /posts/
 Authorization: Token <your_token>
 Content-Type: application/json
@@ -128,12 +130,15 @@ Content-Type: application/json
   "title": "Мой первый пост",
   "text": "Содержание поста..."
 }
-
+```
 Посмотреть определенный комментарий или удалить DELETE или изменить PUT:
+```
 http GET /comments/1
 Authorization: Token <your_token>
+```
 
 Создать комментарий:
+```
 http POST /comments/
 Authorization: Token <your_token>
 Content-Type: application/json
@@ -142,12 +147,12 @@ Content-Type: application/json
   "post": 1,
   "text": "Отличный пост!"
 }
-
+```
  Лента пользователя
-
+```
 http GET /feed/
 Authorization: Token <your_token>
-
+```
 
 # Структура проекта
 
@@ -168,7 +173,7 @@ REST-API/
 ```
 
 # Разработка
-# Запуск тестов
+    Запуск тестов
 
 ```bash
 # Все тесты
@@ -182,14 +187,14 @@ coverage report
 pytest posts/tests/ -v
 ```
 
-# Создание миграций
+    Создание миграций
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-# Создание суперпользователя (уже создан -u:-p admin:admin)
+    Создание суперпользователя (уже создан -u:-p admin:admin)
 
 ```bash
 python manage.py createsuperuser
@@ -199,7 +204,7 @@ python3 manage.py createsuperuser
 
 # Документация API
 
-После запуска доступна интерактивная документация:
+    После запуска доступна интерактивная документация:
 - Swagger UI: http://localhost/swagger/
 - ReDoc: http://localhost/redoc/
 
@@ -215,7 +220,7 @@ DB_PASSWORD=firstpassword
 
 # Примеры использования
 
-# Создание поста через curl
+    Создание поста через curl
 
 ```bash
 curl -X POST http://localhost/posts/ \
@@ -224,7 +229,7 @@ curl -X POST http://localhost/posts/ \
   -d '{"title": "Тестовый пост", "text": "Содержание"}'
 ```
 
-# Получение ленты
+    Получение ленты
 
 ```bash
 curl -X GET http://localhost/feed/ \
