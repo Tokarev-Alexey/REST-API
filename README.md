@@ -34,6 +34,8 @@ cd REST-API
 
 # Запускоем все сервисы
 docker-compose up --build
+# если у вас docker-compose V2 то используйте
+docker compose up
 ```
 Приложение будет доступно по http://localhost:80
 
