@@ -3,7 +3,7 @@ version: '3.8'
 services:
   db:
     image: mysql:8.0.43-debian
-    container_name: a_new_begining_mysql_con
+    container_name: mysql_con
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: firstdb
@@ -18,7 +18,7 @@ services:
 
   web:
     build: .
-    container_name: a_new_begining_django_con
+    container_name: django_con
     environment:
       DB_HOST: db
       DB_NAME: firstdb
@@ -46,12 +46,14 @@ services:
 
   nginx:
     build: ./nginx
-    container_name: a_new_begining_nginx
+    container_name: nginx_con
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - static_volume:/static
       - media_volume:/media
+      - /home/rest/miniapp:/miniapp:ro
     depends_on:
       - web
 

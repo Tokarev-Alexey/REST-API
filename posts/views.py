@@ -1,7 +1,7 @@
 from rest_framework.decorators import action
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
-from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from project_config.my_custom_permissions import IsOwnerPostOrReadOnly, IsOwnerCommentOrReadOnly
 
@@ -16,7 +16,7 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     authentication_classes = [SessionAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerPostOrReadOnly]
-    pagination_class = LimitOffsetPagination
+    pagination_class = PageNumberPagination
 
     '''Для отображения имени автора (вместо ID) в API ответах используется ReadOnlyField в PostSerializer.
     Игнорирует любые попытки установить автора с POST запросом. Поскольку поле только для чтения, пользователь
@@ -42,7 +42,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     authentication_classes = [SessionAuthentication, TokenAuthentication]
     permission_classes = [IsOwnerCommentOrReadOnly]
-    pagination_class = LimitOffsetPagination
+    pagination_class = PageNumberPagination
     '''Автоматом ставит юзера на место автора но к этому нужно еще чтобы поле author_comm=read_only в сериализаторе,
     иначе оно будет подставлено, но его все еще можно будет заменить'''
     def perform_create(self, serializer):
